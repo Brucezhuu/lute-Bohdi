@@ -19,10 +19,9 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
-	"github.com/88250/lute/lex"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/html"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 // Node 描述了节点结构。
@@ -218,126 +217,12 @@ func randStr(length int) string {
 	return string(b)
 }
 
-func (n *Node) Marker(entering bool) (ret string) {
-	switch n.Type {
-	case NodeTagOpenMarker, NodeTagCloseMarker:
-		if entering {
-			return "#"
-		}
-	case NodeEmA6kOpenMarker, NodeEmA6kCloseMarker:
-		if entering {
-			return "*"
-		}
-	case NodeEmU8eOpenMarker, NodeEmU8eCloseMarker:
-		if entering {
-			return "_"
-		}
-	case NodeStrongA6kOpenMarker, NodeStrongA6kCloseMarker:
-		if entering {
-			return "**"
-		}
-	case NodeStrongU8eOpenMarker, NodeStrongU8eCloseMarker:
-		if entering {
-			return "__"
-		}
-	case NodeStrikethrough2OpenMarker, NodeStrikethrough2CloseMarker:
-		if entering {
-			return "~~"
-		}
-	case NodeSupOpenMarker, NodeSupCloseMarker:
-		if entering {
-			return "^"
-		}
-	case NodeSubOpenMarker, NodeSubCloseMarker:
-		if entering {
-			return "~"
-		}
-	case NodeKbdOpenMarker:
-		if entering {
-			return "<kbd>"
-		}
-	case NodeKbdCloseMarker:
-		if entering {
-			return "</kbd>"
-		}
-	case NodeUnderlineOpenMarker:
-		if entering {
-			return "<u>"
-		}
-	case NodeUnderlineCloseMarker:
-		if entering {
-			return "</u>"
-		}
-	case NodeMark2OpenMarker, NodeMark2CloseMarker:
-		if entering {
-			return "=="
-		}
-	case NodeBang:
-		if entering {
-			return "!"
-		}
-	case NodeOpenBracket:
-		if entering {
-			return "["
-		}
-	case NodeCloseBracket:
-		if entering {
-			return "]"
-		}
-	case NodeOpenParen:
-		if entering {
-			return "("
-		}
-	case NodeCloseParen:
-		if entering {
-			return ")"
-		}
-	}
-
-	return ""
-}
-
-func (n *Node) ContainTextMarkTypes(types ...string) bool {
-	nodeTypes := strings.Split(n.TextMarkType, " ")
-	for _, typ := range types {
-		for _, nodeType := range nodeTypes {
-			if typ == nodeType {
-				return true
-			}
-		}
-	}
-	return false
-}
-
 func (n *Node) IsTextMarkType(typ string) bool {
 	types := strings.Split(n.TextMarkType, " ")
 	for _, t := range types {
 		if typ == t {
 			return true
 		}
-	}
-	return false
-}
-
-func (n *Node) IsNextSameInlineMemo() bool {
-	if nil == n {
-		return false
-	}
-
-	var nextInlineMemo *Node
-	for node := n.Next; nil != node; node = node.Next {
-		if nil == n.Next || NodeKramdownSpanIAL == node.Type || nil == node.Next || NodeKramdownSpanIAL == node.Next.Type {
-			continue
-		}
-
-		if NodeTextMark == node.Type && node.IsTextMarkType("inline-memo") {
-			nextInlineMemo = node
-			break
-		}
-	}
-
-	if nil != nextInlineMemo && n.TextMarkInlineMemoContent == nextInlineMemo.TextMarkInlineMemoContent {
-		return true
 	}
 	return false
 }
@@ -411,6 +296,14 @@ func (n *Node) SetIALAttr(name, value string) {
 			kv[1] = value
 			return
 		}
+	}
+
+	if typ := n.IALAttr("type"); "doc" == typ {
+		// 让 type="doc" 保持在最后一个
+		n.RemoveIALAttr("type")
+		n.KramdownIAL = append(n.KramdownIAL, []string{name, value})
+		n.KramdownIAL = append(n.KramdownIAL, []string{"type", "doc"})
+		return
 	}
 	n.KramdownIAL = append(n.KramdownIAL, []string{name, value})
 }
@@ -548,14 +441,10 @@ func (n *Node) Content() (ret string) {
 					buf.WriteString(n.TextMarkTextContent)
 				}
 			} else if "" != n.TextMarkInlineMathContent {
-				content := n.TextMarkInlineMathContent
-				content = strings.ReplaceAll(content, editor.IALValEscNewLine, " ")
-				buf.WriteString(content)
+				buf.WriteString(n.TextMarkInlineMathContent)
 			}
 			if "" != n.TextMarkInlineMemoContent {
-				content := n.TextMarkInlineMemoContent
-				content = strings.ReplaceAll(content, editor.IALValEscNewLine, " ")
-				buf.WriteString(content)
+				buf.WriteString(n.TextMarkInlineMemoContent)
 			}
 		}
 		return WalkContinue
@@ -588,13 +477,9 @@ func (n *Node) Stat() (runeCnt, wordCnt, linkCnt, imgCnt, refCnt int) {
 			if 0 < len(n.TextMarkTextContent) {
 				buf = append(buf, n.TextMarkTextContent...)
 			} else if 0 < len(n.TextMarkInlineMathContent) {
-				content := n.TextMarkInlineMathContent
-				content = strings.ReplaceAll(content, editor.IALValEscNewLine, " ")
-				buf = append(buf, content...)
+				buf = append(buf, n.TextMarkInlineMathContent...)
 			} else if "" != n.TextMarkInlineMemoContent {
-				content := n.TextMarkInlineMemoContent
-				content = strings.ReplaceAll(content, editor.IALValEscNewLine, " ")
-				buf = append(buf, content...)
+				buf = append(buf, n.TextMarkInlineMemoContent...)
 			}
 
 			if n.IsTextMarkType("a") {
@@ -790,16 +675,11 @@ func (n *Node) List() (ret []*Node) {
 // ParentIs 判断 n 的类型是否在指定的 nodeTypes 类型列表内。
 func (n *Node) ParentIs(nodeType NodeType, nodeTypes ...NodeType) bool {
 	types := append(nodeTypes, nodeType)
-	deep := 0
 	for p := n.Parent; nil != p; p = p.Parent {
 		for _, pt := range types {
 			if pt == p.Type {
 				return true
 			}
-		}
-		deep++
-		if 128 < deep {
-			break
 		}
 	}
 	return false
@@ -836,18 +716,6 @@ func (n *Node) IsMarker() bool {
 		NodeMathBlockOpenMarker, NodeMathBlockCloseMarker, NodeInlineMathOpenMarker, NodeInlineMathCloseMarker, NodeYamlFrontMatterOpenMarker, NodeYamlFrontMatterCloseMarker,
 		NodeMark1OpenMarker, NodeMark1CloseMarker, NodeMark2OpenMarker, NodeMark2CloseMarker, NodeTagOpenMarker, NodeTagCloseMarker,
 		NodeSuperBlockOpenMarker, NodeSuperBlockLayoutMarker, NodeSuperBlockCloseMarker, NodeSupOpenMarker, NodeSupCloseMarker, NodeSubOpenMarker, NodeSubCloseMarker:
-		return true
-	}
-	return false
-}
-
-// IsCloseMarker 判断 n 是否为闭合标记符。
-func (n *Node) IsCloseMarker() bool {
-	switch n.Type {
-	case NodeHeadingC8hMarker, NodeBlockquoteMarker, NodeCodeBlockFenceCloseMarker, NodeEmA6kCloseMarker, NodeEmU8eCloseMarker,
-		NodeStrongA6kCloseMarker, NodeStrongU8eCloseMarker, NodeCodeSpanCloseMarker, NodeStrikethrough1CloseMarker, NodeStrikethrough2CloseMarker,
-		NodeMathBlockCloseMarker, NodeInlineMathCloseMarker, NodeYamlFrontMatterCloseMarker, NodeMark1CloseMarker, NodeMark2CloseMarker,
-		NodeTagCloseMarker, NodeSuperBlockCloseMarker, NodeSupCloseMarker, NodeSubCloseMarker:
 		return true
 	}
 	return false
@@ -1016,7 +884,7 @@ const (
 	NodeYamlFrontMatterContent     NodeType = 427 // YAML Front Matter 内容
 	NodeYamlFrontMatterCloseMarker NodeType = 428 // 结束 YAML Front Matter 标记符 ---
 
-	// 内容块引用（Block Reference） https://github.com/88250/lute/issues/82
+	// 内容块引用（Block Reference） https://github.com/Brucezhuu/lute-Bohdi/issues/82
 
 	NodeBlockRef            NodeType = 430 // 内容块引用节点
 	NodeBlockRefID          NodeType = 431 // 被引用的内容块（定义块）ID
@@ -1024,7 +892,7 @@ const (
 	NodeBlockRefText        NodeType = 433 // 内容块引用锚文本
 	NodeBlockRefDynamicText NodeType = 434 // 内容块引用动态锚文本
 
-	// ==Mark== 标记语法 https://github.com/88250/lute/issues/84
+	// ==Mark== 标记语法 https://github.com/Brucezhuu/lute-Bohdi/issues/84
 
 	NodeMark             NodeType = 450 // 标记
 	NodeMark1OpenMarker  NodeType = 451 // 开始标记标记符 =
@@ -1032,32 +900,32 @@ const (
 	NodeMark2OpenMarker  NodeType = 453 // 开始标记标记符 ==
 	NodeMark2CloseMarker NodeType = 454 // 结束标记标记符 ==
 
-	// kramdown 内联属性列表 https://github.com/88250/lute/issues/89 and https://github.com/88250/lute/issues/118
+	// kramdown 内联属性列表 https://github.com/Brucezhuu/lute-Bohdi/issues/89 and https://github.com/Brucezhuu/lute-Bohdi/issues/118
 
 	NodeKramdownBlockIAL NodeType = 455 // 块级内联属性列表 {: name="value"}
 	NodeKramdownSpanIAL  NodeType = 456 // 行级内联属性列表 *foo*{: name="value"}bar
 
-	// #Tag# 标签语法 https://github.com/88250/lute/issues/92
+	// #Tag# 标签语法 https://github.com/Brucezhuu/lute-Bohdi/issues/92
 
 	NodeTag            NodeType = 460 // 标签
 	NodeTagOpenMarker  NodeType = 461 // 开始标签标记符 #
 	NodeTagCloseMarker NodeType = 462 // 结束标签标记符 #
 
-	// 内容块查询嵌入（Block Query Embed）语法 https://github.com/88250/lute/issues/96
+	// 内容块查询嵌入（Block Query Embed）语法 https://github.com/Brucezhuu/lute-Bohdi/issues/96
 
 	NodeBlockQueryEmbed       NodeType = 465 // 内容块查询嵌入
 	NodeOpenBrace             NodeType = 466 // {
 	NodeCloseBrace            NodeType = 467 // }
 	NodeBlockQueryEmbedScript NodeType = 468 // 内容块查询嵌入脚本
 
-	// 超级块语法 https://github.com/88250/lute/issues/111
+	// 超级块语法 https://github.com/Brucezhuu/lute-Bohdi/issues/111
 
 	NodeSuperBlock             NodeType = 475 // 超级块节点
 	NodeSuperBlockOpenMarker   NodeType = 476 // 开始超级块标记符 {{{
 	NodeSuperBlockLayoutMarker NodeType = 477 // 超级块布局 row/col
 	NodeSuperBlockCloseMarker  NodeType = 478 // 结束超级块标记符 }}}
 
-	// 上标下标语法 https://github.com/88250/lute/issues/113
+	// 上标下标语法 https://github.com/Brucezhuu/lute-Bohdi/issues/113
 
 	NodeSup            NodeType = 485 // 上标
 	NodeSupOpenMarker  NodeType = 486 // 开始上标标记符 ^
@@ -1066,7 +934,7 @@ const (
 	NodeSubOpenMarker  NodeType = 491 // 开始下标标记符 ~
 	NodeSubCloseMarker NodeType = 492 // 结束下标标记符 ~
 
-	// Git 冲突标记 https://github.com/88250/lute/issues/131
+	// Git 冲突标记 https://github.com/Brucezhuu/lute-Bohdi/issues/131
 
 	NodeGitConflict            NodeType = 495 // Git 冲突标记
 	NodeGitConflictOpenMarker  NodeType = 496 // 开始 Git 冲突标记标记符 <<<<<<<
@@ -1109,7 +977,7 @@ const (
 
 	NodeWidget NodeType = 535 // <iframe data-type="NodeWidget" data-subtype="widget"></iframe>
 
-	// 文件注解引用 https://github.com/88250/lute/issues/155
+	// 文件注解引用 https://github.com/Brucezhuu/lute-Bohdi/issues/155
 
 	NodeFileAnnotationRef      NodeType = 540 // 文件注解引用节点
 	NodeFileAnnotationRefID    NodeType = 541 // 被引用的文件注解 ID（file/annotation）
@@ -1123,6 +991,10 @@ const (
 	// 自定义块 https://github.com/siyuan-note/siyuan/issues/8418 ;;;info
 
 	NodeCustomBlock NodeType = 560 // 自定义块
+	// Bodhi 自定义节点
+
+	NodeMDlink NodeType = 600 // 图片
+	NodeCaret  NodeType = 601 // ^符号
 
 	NodeTypeMaxVal NodeType = 1024 // 节点类型最大值
 )

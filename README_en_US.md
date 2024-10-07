@@ -3,30 +3,30 @@
 <br><br>
 A structured Markdown engine that supports Go and JavaScript
 <br><br>
-<a title="Build Status" target="_blank" href="https://github.com/88250/lute/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/88250/lute/gotest.yml?style=flat-square"></a>
-<a title="Go Report Card" target="_blank" href="https://goreportcard.com/report/github.com/88250/lute"><img src="https://goreportcard.com/badge/github.com/88250/lute?style=flat-square"></a>
-<a title="Coverage Status" target="_blank" href="https://coveralls.io/github/88250/lute"><img src="https://img.shields.io/coveralls/github/88250/lute.svg?style=flat-square&color=CC9933"></a>
-<a title="Code Size" target="_blank" href="https://github.com/88250/lute"><img src="https://img.shields.io/github/languages/code-size/88250/lute.svg?style=flat-square"></a>
-<a title="MulanPSL" target="_blank" href="https://github.com/88250/lute/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MulanPSL-orange.svg?style=flat-square"></a>
+<a title="Build Status" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/Brucezhuu/lute-Bohdi/gotest.yml?style=flat-square"></a>
+<a title="Go Report Card" target="_blank" href="https://goreportcard.com/report/github.com/Brucezhuu/lute-Bohdi"><img src="https://goreportcard.com/badge/github.com/Brucezhuu/lute-Bohdi?style=flat-square"></a>
+<a title="Coverage Status" target="_blank" href="https://coveralls.io/github/Brucezhuu/lute-Bohdi"><img src="https://img.shields.io/coveralls/github/Brucezhuu/lute-Bohdi.svg?style=flat-square&color=CC9933"></a>
+<a title="Code Size" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi"><img src="https://img.shields.io/github/languages/code-size/Brucezhuu/lute-Bohdi.svg?style=flat-square"></a>
+<a title="MulanPSL" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MulanPSL-orange.svg?style=flat-square"></a>
 <br>
-<a title="GitHub Commits" target="_blank" href="https://github.com/88250/lute/commits/master"><img src="https://img.shields.io/github/commit-activity/m/88250/lute.svg?style=flat-square"></a>
-<a title="Last Commit" target="_blank" href="https://github.com/88250/lute/commits/master"><img src="https://img.shields.io/github/last-commit/88250/lute.svg?style=flat-square&color=FF9900"></a>
-<a title="GitHub Pull Requests" target="_blank" href="https://github.com/88250/lute/pulls"><img src="https://img.shields.io/github/issues-pr-closed/88250/lute.svg?style=flat-square&color=FF9966"></a>
-<a title="Hits" target="_blank" href="https://github.com/88250/hits"><img src="https://hits.b3log.org/88250/lute.svg"></a>
+<a title="GitHub Commits" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/commits/master"><img src="https://img.shields.io/github/commit-activity/m/Brucezhuu/lute-Bohdi.svg?style=flat-square"></a>
+<a title="Last Commit" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/commits/master"><img src="https://img.shields.io/github/last-commit/Brucezhuu/lute-Bohdi.svg?style=flat-square&color=FF9900"></a>
+<a title="GitHub Pull Requests" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/pulls"><img src="https://img.shields.io/github/issues-pr-closed/Brucezhuu/lute-Bohdi.svg?style=flat-square&color=FF9966"></a>
+<a title="Hits" target="_blank" href="https://github.com/88250/hits"><img src="https://hits.b3log.org/Brucezhuu/lute-Bohdi.svg"></a>
 <br><br>
-<a title="GitHub Watchers" target="_blank" href="https://github.com/88250/lute/watchers"><img src="https://img.shields.io/github/watchers/88250/lute.svg?label=Watchers&style=social"></a>  
-<a title="GitHub Stars" target="_blank" href="https://github.com/88250/lute/stargazers"><img src="https://img.shields.io/github/stars/88250/lute.svg?label=Stars&style=social"></a>  
-<a title="GitHub Forks" target="_blank" href="https://github.com/88250/lute/network/members"><img src="https://img.shields.io/github/forks/88250/lute.svg?label=Forks&style=social"></a>  
+<a title="GitHub Watchers" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/watchers"><img src="https://img.shields.io/github/watchers/Brucezhuu/lute-Bohdi.svg?label=Watchers&style=social"></a>  
+<a title="GitHub Stars" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/stargazers"><img src="https://img.shields.io/github/stars/Brucezhuu/lute-Bohdi.svg?label=Stars&style=social"></a>  
+<a title="GitHub Forks" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/network/members"><img src="https://img.shields.io/github/forks/Brucezhuu/lute-Bohdi.svg?label=Forks&style=social"></a>  
 <a title="Author GitHub Followers" target="_blank" href="https://github.com/88250"><img src="https://img.shields.io/github/followers/88250.svg?label=Followers&style=social"></a>
 </p>
 
 <p align="center">
-<a href="https://github.com/88250/lute/blob/master/README.md">中文</a>
+<a href="https://github.com/Brucezhuu/lute-Bohdi/blob/master/README.md">中文</a>
 </p>
 
 ## 💡 Introduction
 
-[Lute](https://github.com/88250/lute) is a structured Markdown engine that fully implements the latest [GFM](https://github.github.com/gfm/) / [CommonMark](https://commonmark.org) standard, better support for Chinese context.
+[Lute](https://github.com/Brucezhuu/lute-Bohdi) is a structured Markdown engine that fully implements the latest [GFM](https://github.github.com/gfm/) / [CommonMark](https://commonmark.org) standard, better support for Chinese context.
 
 Welcome to [Lute Official Discussion Forum](https://ld246.com/tag/lute) to learn more.
 
@@ -273,8 +273,8 @@ It is recommended to use other libraries (such as [bluemonday](https://github.co
 
 There are three ways to use Lute:
 
-1. Backend: Introduce `github.com/88250/lute` package in Go language
-2. Backend: Start Lute as an HTTP service process for other processes to call, please refer to [here](https://github.com/88250/lute-http)
+1. Backend: Introduce `github.com/Brucezhuu/lute-Bohdi` package in Go language
+2. Backend: Start Lute as an HTTP service process for other processes to call, please refer to [here](https://github.com/Brucezhuu/lute-Bohdi-http)
 3. Front end: Introduce lute.min.js in the js directory, support Node.js
 
 ### Go
@@ -282,7 +282,7 @@ There are three ways to use Lute:
 Introduce the Lute library:
 
 ```shell
-go get -u github.com/88250/lute
+go get -u github.com/Brucezhuu/lute-Bohdi
 ```
 
 Working example of minimization:
@@ -293,7 +293,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/88250/lute"
+	"github.com/Brucezhuu/lute-Bohdi"
 )
 
 func main() {
@@ -329,7 +329,7 @@ Some details:
 ## 🏘️ Community
 
 * [Forum](https://ld246.com/tag/lute)
-* [Issues](https://github.com/88250/lute/issues/new/choose)
+* [Issues](https://github.com/Brucezhuu/lute-Bohdi/issues/new/choose)
 
 ## 📄 License
 
