@@ -7,30 +7,30 @@
 转轴拨弦三两声 未成曲调先有情
 </em>
 <br><br>
-<a title="Build Status" target="_blank" href="https://github.com/88250/lute/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/88250/lute/gotest.yml?style=flat-square"></a>
-<a title="Go Report Card" target="_blank" href="https://goreportcard.com/report/github.com/88250/lute"><img src="https://goreportcard.com/badge/github.com/88250/lute?style=flat-square"></a>
-<a title="Coverage Status" target="_blank" href="https://coveralls.io/github/88250/lute"><img src="https://img.shields.io/coveralls/github/88250/lute.svg?style=flat-square&color=CC9933"></a>
-<a title="Code Size" target="_blank" href="https://github.com/88250/lute"><img src="https://img.shields.io/github/languages/code-size/88250/lute.svg?style=flat-square"></a>
-<a title="MulanPSL" target="_blank" href="https://github.com/88250/lute/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MulanPSL-orange.svg?style=flat-square"></a>
+<a title="Build Status" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/actions/workflows/gotest.yml"><img src="https://img.shields.io/github/actions/workflow/status/Brucezhuu/lute-Bohdi/gotest.yml?style=flat-square"></a>
+<a title="Go Report Card" target="_blank" href="https://goreportcard.com/report/github.com/Brucezhuu/lute-Bohdi"><img src="https://goreportcard.com/badge/github.com/Brucezhuu/lute-Bohdi?style=flat-square"></a>
+<a title="Coverage Status" target="_blank" href="https://coveralls.io/github/Brucezhuu/lute-Bohdi"><img src="https://img.shields.io/coveralls/github/Brucezhuu/lute-Bohdi.svg?style=flat-square&color=CC9933"></a>
+<a title="Code Size" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi"><img src="https://img.shields.io/github/languages/code-size/Brucezhuu/lute-Bohdi.svg?style=flat-square"></a>
+<a title="MulanPSL" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MulanPSL-orange.svg?style=flat-square"></a>
 <br>
-<a title="GitHub Commits" target="_blank" href="https://github.com/88250/lute/commits/master"><img src="https://img.shields.io/github/commit-activity/m/88250/lute.svg?style=flat-square"></a>
-<a title="Last Commit" target="_blank" href="https://github.com/88250/lute/commits/master"><img src="https://img.shields.io/github/last-commit/88250/lute.svg?style=flat-square&color=FF9900"></a>
-<a title="GitHub Pull Requests" target="_blank" href="https://github.com/88250/lute/pulls"><img src="https://img.shields.io/github/issues-pr-closed/88250/lute.svg?style=flat-square&color=FF9966"></a>
-<a title="Hits" target="_blank" href="https://github.com/88250/hits"><img src="https://hits.b3log.org/88250/lute.svg"></a>
+<a title="GitHub Commits" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/commits/master"><img src="https://img.shields.io/github/commit-activity/m/Brucezhuu/lute-Bohdi.svg?style=flat-square"></a>
+<a title="Last Commit" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/commits/master"><img src="https://img.shields.io/github/last-commit/Brucezhuu/lute-Bohdi.svg?style=flat-square&color=FF9900"></a>
+<a title="GitHub Pull Requests" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/pulls"><img src="https://img.shields.io/github/issues-pr-closed/Brucezhuu/lute-Bohdi.svg?style=flat-square&color=FF9966"></a>
+<a title="Hits" target="_blank" href="https://github.com/88250/hits"><img src="https://hits.b3log.org/Brucezhuu/lute-Bohdi.svg"></a>
 <br><br>
-<a title="GitHub Watchers" target="_blank" href="https://github.com/88250/lute/watchers"><img src="https://img.shields.io/github/watchers/88250/lute.svg?label=Watchers&style=social"></a>  
-<a title="GitHub Stars" target="_blank" href="https://github.com/88250/lute/stargazers"><img src="https://img.shields.io/github/stars/88250/lute.svg?label=Stars&style=social"></a>  
-<a title="GitHub Forks" target="_blank" href="https://github.com/88250/lute/network/members"><img src="https://img.shields.io/github/forks/88250/lute.svg?label=Forks&style=social"></a>  
+<a title="GitHub Watchers" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/watchers"><img src="https://img.shields.io/github/watchers/Brucezhuu/lute-Bohdi.svg?label=Watchers&style=social"></a>  
+<a title="GitHub Stars" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/stargazers"><img src="https://img.shields.io/github/stars/Brucezhuu/lute-Bohdi.svg?label=Stars&style=social"></a>  
+<a title="GitHub Forks" target="_blank" href="https://github.com/Brucezhuu/lute-Bohdi/network/members"><img src="https://img.shields.io/github/forks/Brucezhuu/lute-Bohdi.svg?label=Forks&style=social"></a>  
 <a title="Author GitHub Followers" target="_blank" href="https://github.com/88250"><img src="https://img.shields.io/github/followers/88250.svg?label=Followers&style=social"></a>
 </p>
 
 <p align="center">
-<a href="https://github.com/88250/lute/blob/master/README_en_US.md">English</a>
+<a href="https://github.com/Brucezhuu/lute-Bohdi/blob/master/README_en_US.md">English</a>
 </p>
 
 ## 💡 简介
 
-[Lute](https://github.com/88250/lute) 是一款结构化的 Markdown 引擎，完整实现了最新的 [GFM](https://github.github.com/gfm/)/[CommonMark](https://commonmark.org) 规范，对中文语境支持更好。
+[Lute](https://github.com/Brucezhuu/lute-Bohdi) 是一款结构化的 Markdown 引擎，完整实现了最新的 [GFM](https://github.github.com/gfm/)/[CommonMark](https://commonmark.org) 规范，对中文语境支持更好。
 
 欢迎到 [Lute 官方讨论区](https://ld246.com/tag/lute)了解更多。同时也欢迎关注 B3log 开源社区微信公众号 `B3log开源`：
 
@@ -279,8 +279,8 @@ Lute 没有实现实现 GFM 中的 [Disallowed Raw HTML (extension)](https://git
 
 有三种方式使用 Lute：
 
-1. 后端：用 Go 语言的话引入 `github.com/88250/lute` 包
-2. 后端：将 Lute 启动为一个 HTTP 服务进程供其他进程调用，具体请参考[这里](https://github.com/88250/lute-http)
+1. 后端：用 Go 语言的话引入 `github.com/Brucezhuu/lute-Bohdi` 包
+2. 后端：将 Lute 启动为一个 HTTP 服务进程供其他进程调用，具体请参考[这里](https://github.com/Brucezhuu/lute-Bohdi-http)
 3. 前端：引入 js 目录下的 lute.min.js，支持 Node.js
 
 ### Go
@@ -288,7 +288,7 @@ Lute 没有实现实现 GFM 中的 [Disallowed Raw HTML (extension)](https://git
 引入 Lute 库：
 
 ```shell
-go get -u github.com/88250/lute
+go get -u github.com/Brucezhuu/lute-Bohdi
 ```
 
 最小化可工作示例：
@@ -299,7 +299,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/88250/lute"
+	"github.com/Brucezhuu/lute-Bohdi"
 )
 
 func main() {
@@ -336,7 +336,7 @@ func main() {
 ## 🏘️ 社区
 
 * [讨论区](https://ld246.com/tag/lute)
-* [报告问题](https://github.com/88250/lute/issues/new/choose)
+* [报告问题](https://github.com/Brucezhuu/lute-Bohdi/issues/new/choose)
 
 ## 📄 授权
 
