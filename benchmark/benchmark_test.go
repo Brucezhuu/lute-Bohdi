@@ -14,7 +14,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/88250/lute"
+	"github.com/Brucezhuu/lute-Bohdi"
 )
 
 const spec = "commonmark-spec"

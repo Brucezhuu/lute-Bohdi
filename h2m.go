@@ -16,14 +16,14 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
-	"github.com/88250/lute/html/atom"
-	"github.com/88250/lute/lex"
-	"github.com/88250/lute/parse"
-	"github.com/88250/lute/render"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
+	"github.com/Brucezhuu/lute-Bohdi/html/atom"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
+	"github.com/Brucezhuu/lute-Bohdi/render"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 // HTML2Markdown 将 HTML 转换为 Markdown。
@@ -676,7 +676,12 @@ func (lute *Lute) genASTByDOM(n *html.Node, tree *parse.Tree) {
 		tree.Context.Tip = node
 		defer tree.Context.ParentTip()
 	case atom.A:
-		node.Type = ast.NodeLink
+		if "bohdi-filelink" == class {
+			node.Type = ast.NodeMDlink
+			node.AppendChild(&ast.Node{Type: ast.NodeCaret})
+		} else {
+			node.Type = ast.NodeLink
+		}
 		text := strings.TrimSpace(util.DomText(n))
 		if "" == text && nil != n.Parent && lute.parentIs(n, atom.H1, atom.H2, atom.H3, atom.H4, atom.H5, atom.H6, atom.Div, atom.Section) && nil == util.DomChildrenByType(n, atom.Img) {
 			// 丢弃标题中文本为空的链接，这样的链接是没有锚文本的锚点
