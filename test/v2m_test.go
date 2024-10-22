@@ -13,11 +13,11 @@ package test
 import (
 	"testing"
 
-	"github.com/88250/lute"
+	"github.com/Brucezhuu/lute-Bohdi"
 )
 
 var vditorDOM2MdTests = []parseTest{
-
+	{"f1", "<p data-block=\"0\"><a class='ficus-filelink' href=\"./testmd.md\">1</a></p>", "-[1](./testmd.md)\n"},
 	{"117", "<a><img></a>", "[![]()]()\n"},
 	{"116", "<a href=\"https://example.com\"><img src=\"https://example.org\" alt=\"example\" title=\"example\"></a>", "[![example](https://example.org \"example\")](https://example.com)\n"},
 	{"115", "<ul><li><img src=\"xxx.png\"></li></ul>", "* ![](xxx.png)\n"},

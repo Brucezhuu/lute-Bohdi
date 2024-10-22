@@ -14,9 +14,9 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
-	"github.com/88250/lute/html/atom"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
+	"github.com/Brucezhuu/lute-Bohdi/html/atom"
 )
 
 func GetTextMarkTextDataWithoutEscapeSingleQuote(n *html.Node) (content string) {

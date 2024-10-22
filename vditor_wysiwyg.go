@@ -15,13 +15,13 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
-	"github.com/88250/lute/html/atom"
-	"github.com/88250/lute/parse"
-	"github.com/88250/lute/render"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
+	"github.com/Brucezhuu/lute-Bohdi/html/atom"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
+	"github.com/Brucezhuu/lute-Bohdi/render"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 // Md2HTML 将 markdown 转换为标准 HTML，用于源码模式预览。
@@ -452,9 +452,34 @@ func (lute *Lute) hljsSpans(n *html.Node, spans *[]*html.Node) {
 		n.InsertBefore(&html.Node{Type: html.TextNode, Data: text})
 	}
 
+	if atom.Span == n.DataAtom && strings.HasPrefix(util.DomAttrValue(n, "class"), "vditor-search") {
+		*spans = append(*spans, n)
+		text := util.DomText(n)
+		if nil != n.PrevSibling {
+			n.PrevSibling.Data += text
+		} else if nil != n.NextSibling {
+			n.NextSibling.Data = text + n.NextSibling.Data
+		} else {
+			n.InsertBefore(&html.Node{Type: html.TextNode, Data: text})
+		}
+	}
+
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		lute.hljsSpans(c, spans)
 	}
+}
+
+func retrivalCodeTree(n *html.Node) string {
+	oriStr := ""
+	siblings := n.FirstChild
+	for siblings != nil {
+		if siblings.DataAtom != atom.Span {
+			oriStr += siblings.Data
+		}
+		oriStr += retrivalCodeTree(siblings)
+		siblings = siblings.NextSibling
+	}
+	return oriStr
 }
 
 func (lute *Lute) removeEmptyNodes(node *html.Node) {
@@ -1251,6 +1276,7 @@ func (lute *Lute) genASTByVditorDOM(n *html.Node, tree *parse.Tree) {
 		if nil == n.FirstChild {
 			return
 		}
+		oriStr := retrivalCodeTree(n)
 		contentStr := strings.ReplaceAll(n.FirstChild.Data, editor.Zwsp, "")
 		if editor.Caret == contentStr {
 			node.Tokens = editor.CaretTokens
@@ -1322,8 +1348,12 @@ func (lute *Lute) genASTByVditorDOM(n *html.Node, tree *parse.Tree) {
 				return
 			}
 		}
-
-		node.Type = ast.NodeLink
+		if "ficus-filelink" == class {
+			node.Type = ast.NodeMDlink
+			node.AppendChild(&ast.Node{Type: ast.NodeCaret})
+		} else {
+			node.Type = ast.NodeLink
+		}
 		node.AppendChild(&ast.Node{Type: ast.NodeOpenBracket})
 		tree.Context.Tip.AppendChild(node)
 		tree.Context.Tip = node
