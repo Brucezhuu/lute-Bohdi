@@ -13,11 +13,11 @@ package test
 import (
 	"testing"
 
-	"github.com/88250/lute"
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/parse"
-	"github.com/88250/lute/render"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
+	"github.com/Brucezhuu/lute-Bohdi/render"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 var protyleExportMdTests = []parseTest{

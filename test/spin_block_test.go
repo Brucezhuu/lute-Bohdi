@@ -13,8 +13,8 @@ package test
 import (
 	"testing"
 
-	"github.com/88250/lute"
-	"github.com/88250/lute/ast"
+	"github.com/Brucezhuu/lute-Bohdi"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
 )
 
 var spinBlockDOMTests = []*parseTest{

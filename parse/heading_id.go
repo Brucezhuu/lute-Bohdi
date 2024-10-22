@@ -13,9 +13,9 @@ package parse
 import (
 	"bytes"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 var openCurlyBrace = util.StrToBytes("{")

@@ -11,8 +11,8 @@
 package parse
 
 import (
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/lex"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
 )
 
 // BlockquoteStart 判断块引用（>）是否开始。

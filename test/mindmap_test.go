@@ -13,8 +13,8 @@ package test
 import (
 	"testing"
 
-	"github.com/88250/lute"
-	"github.com/88250/lute/editor"
+	"github.com/Brucezhuu/lute-Bohdi"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
 )
 
 var mindmapTests = []parseTest{

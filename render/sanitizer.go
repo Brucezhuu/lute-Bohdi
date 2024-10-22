@@ -16,9 +16,9 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 // 没有实现可扩展的策略，仅过滤不安全的标签和属性。

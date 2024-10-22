@@ -17,12 +17,12 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
-	"github.com/88250/lute/lex"
-	"github.com/88250/lute/parse"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 // ProtyleRenderer 描述了 Protyle WYSIWYG Block DOM 渲染器。
@@ -78,6 +78,8 @@ func NewProtyleRenderer(tree *parse.Tree, options *Options) *ProtyleRenderer {
 	ret.RendererFuncs[ast.NodeInlineHTML] = ret.renderInlineHTML
 	ret.RendererFuncs[ast.NodeLink] = ret.renderLink
 	ret.RendererFuncs[ast.NodeImage] = ret.renderImage
+	ret.RendererFuncs[ast.NodeMDlink] = ret.renderMDlink
+	ret.RendererFuncs[ast.NodeCaret] = ret.renderCaret
 	ret.RendererFuncs[ast.NodeBang] = ret.renderBang
 	ret.RendererFuncs[ast.NodeOpenBracket] = ret.renderOpenBracket
 	ret.RendererFuncs[ast.NodeCloseBracket] = ret.renderCloseBracket
@@ -168,6 +170,10 @@ func NewProtyleRenderer(tree *parse.Tree, options *Options) *ProtyleRenderer {
 	ret.RendererFuncs[ast.NodeAttributeView] = ret.renderAttributeView
 	ret.RendererFuncs[ast.NodeCustomBlock] = ret.renderCustomBlock
 	return ret
+}
+
+func (r *ProtyleRenderer) renderCaret(node *ast.Node, entering bool) ast.WalkStatus {
+	return ast.WalkContinue
 }
 
 func (r *ProtyleRenderer) renderCustomBlock(node *ast.Node, entering bool) ast.WalkStatus {
@@ -1326,6 +1332,36 @@ func (r *ProtyleRenderer) renderImage(node *ast.Node, entering bool) ast.WalkSta
 			r.WriteString(editor.Zwsp)
 			return ast.WalkContinue
 		}
+	}
+	return ast.WalkContinue
+}
+
+func (r *ProtyleRenderer) renderMDlink(node *ast.Node, entering bool) ast.WalkStatus {
+	if entering {
+		dest := node.ChildByType(ast.NodeLinkDest)
+		destTokens := dest.Tokens
+		if r.Options.Sanitize {
+			destTokens = bytes.TrimSpace(destTokens)
+			destTokens = sanitize(destTokens)
+			tokens := bytes.ToLower(destTokens)
+			if bytes.HasPrefix(tokens, []byte("javascript:")) {
+				destTokens = nil
+			}
+		}
+		destTokens = r.LinkPath(destTokens)
+		caretInDest := bytes.Contains(destTokens, editor.CaretTokens)
+		if caretInDest {
+			text := node.ChildByType(ast.NodeLinkText)
+			text.Tokens = append(text.Tokens, editor.CaretTokens...)
+			destTokens = bytes.ReplaceAll(destTokens, editor.CaretTokens, nil)
+		}
+		attrs := [][]string{{"data-type", "a"}, {"data-href", string(destTokens)}}
+		if title := node.ChildByType(ast.NodeLinkTitle); nil != title && nil != title.Tokens {
+			attrs = append(attrs, []string{"data-title", r.escapeRefText(string(title.Tokens))})
+		}
+		r.Tag("span", attrs, false)
+	} else {
+		r.Tag("/span", nil, false)
 	}
 	return ast.WalkContinue
 }

@@ -17,12 +17,12 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
-	"github.com/88250/lute/lex"
-	"github.com/88250/lute/parse"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 type ProtyleExportMdRenderer struct {
@@ -1350,6 +1350,29 @@ func (r *ProtyleExportMdRenderer) renderBang(node *ast.Node, entering bool) ast.
 }
 
 func (r *ProtyleExportMdRenderer) renderImage(node *ast.Node, entering bool) ast.WalkStatus {
+	return ast.WalkContinue
+}
+
+func (r *ProtyleExportMdRenderer) renderMDLink(node *ast.Node, entering bool) ast.WalkStatus {
+	if entering {
+		r.LinkTextAutoSpacePrevious(node)
+		if 3 == node.LinkType {
+			text := node.ChildByType(ast.NodeLinkText).Tokens
+			if bytes.Equal(text, node.LinkRefLabel) {
+				r.WriteString("[" + util.BytesToStr(text) + "]")
+			} else {
+				r.WriteString("[" + util.BytesToStr(text) + "][" + util.BytesToStr(node.LinkRefLabel) + "]")
+			}
+			return ast.WalkSkipChildren
+		}
+		if 1 == node.LinkType {
+			dest := node.ChildByType(ast.NodeLinkDest).Tokens
+			r.Write(dest)
+			return ast.WalkSkipChildren
+		}
+	} else {
+		r.LinkTextAutoSpaceNext(node)
+	}
 	return ast.WalkContinue
 }
 

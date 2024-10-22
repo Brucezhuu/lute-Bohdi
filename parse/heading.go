@@ -13,10 +13,10 @@ package parse
 import (
 	"bytes"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/editor"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
 
-	"github.com/88250/lute/lex"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
 )
 
 // ATXHeadingStart 判断 ATX 标题（#）是否开始。

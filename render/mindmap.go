@@ -14,12 +14,12 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/parse"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 func EChartsMindmapStr(listContent string) string {

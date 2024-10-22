@@ -13,8 +13,8 @@ package parse
 import (
 	"bytes"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/lex"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
 )
 
 func (context *Context) parseTable(paragraph *ast.Node) (retParagraph, retTable *ast.Node) {
@@ -131,7 +131,7 @@ func (context *Context) parseTable0(tokens []byte) (ret *ast.Node) {
 
 	delimRow := lex.TrimWhitespace(lines[1])
 	if 2 > len(delimRow) {
-		// 换行+冒号会被识别为表格 https://github.com/88250/lute/issues/198
+		// 换行+冒号会被识别为表格 https://github.com/Brucezhuu/lute-Bohdi/issues/198
 		return
 	}
 

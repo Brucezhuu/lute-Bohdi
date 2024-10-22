@@ -15,11 +15,11 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
-	"github.com/88250/lute/lex"
-	"github.com/88250/lute/util"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 func (t *Tree) parseGFMAutoEmailLink(node *ast.Node) {
@@ -384,7 +384,7 @@ func (t *Tree) parseGFMAutoLink0(node *ast.Node) {
 		linkText := addr
 		if bytes.HasPrefix(linkText, []byte("https://github.com/")) {
 			if bytes.Contains(linkText, []byte("/issues/")) {
-				// 优化 GitHub Issues 自动链接文本 https://github.com/88250/lute/issues/161
+				// 优化 GitHub Issues 自动链接文本 https://github.com/Brucezhuu/lute-Bohdi/issues/161
 				repo := linkText[len("https://github.com/"):]
 				repo = repo[:bytes.Index(repo, []byte("/issues/"))]
 				num := bytes.Split(linkText, []byte("/issues/"))[1]
@@ -402,7 +402,7 @@ func (t *Tree) parseGFMAutoLink0(node *ast.Node) {
 					}
 				}
 			} else if bytes.Contains(linkText, []byte("/pull/")) {
-				// 优化 GitHub Pull Requests 自动链接文本 https://github.com/88250/lute/issues/208
+				// 优化 GitHub Pull Requests 自动链接文本 https://github.com/Brucezhuu/lute-Bohdi/issues/208
 				repo := linkText[len("https://github.com/"):]
 				repo = repo[:bytes.Index(repo, []byte("/pull/"))]
 				num := bytes.Split(linkText, []byte("/pull/"))[1]
@@ -563,6 +563,9 @@ func (t *Tree) newLink(typ ast.NodeType, text, dest, title []byte, linkType int)
 	ret = &ast.Node{Type: typ, LinkType: linkType}
 	if ast.NodeImage == typ {
 		ret.AppendChild(&ast.Node{Type: ast.NodeBang})
+	}
+	if ast.NodeMDlink == typ {
+		ret.AppendChild(&ast.Node{Type: ast.NodeCaret})
 	}
 	ret.AppendChild(&ast.Node{Type: ast.NodeOpenBracket})
 	ret.AppendChild(&ast.Node{Type: ast.NodeLinkText, Tokens: text})

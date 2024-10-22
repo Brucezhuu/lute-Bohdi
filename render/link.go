@@ -12,8 +12,9 @@ package render
 
 import (
 	"bytes"
-	"github.com/88250/lute/util"
 	"strings"
+
+	"github.com/Brucezhuu/lute-Bohdi/util"
 )
 
 func (r *BaseRenderer) EncodeLinkSpace(dest string) string {
@@ -63,8 +64,8 @@ func (r *BaseRenderer) isRelativePath(dest []byte) bool {
 		return true
 	}
 
-	if '/' == dest[0] {
-		return false
-	}
-	return !bytes.Contains(dest, []byte(":/")) && !bytes.Contains(dest, []byte(":\\")) && !bytes.Contains(dest, []byte(":%5C"))
+	// if '/' == dest[0] {
+	// 	return false
+	// }
+	return !bytes.Contains(dest, []byte(":/")) /*&& !bytes.Contains(dest, []byte(":\\\\")) */ && !bytes.Contains(dest, []byte(":%5C"))
 }

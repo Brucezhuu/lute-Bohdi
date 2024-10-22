@@ -15,8 +15,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/88250/lute"
-	"github.com/88250/lute/parse"
+	"github.com/Brucezhuu/lute-Bohdi"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
 )
 
 func TestBlock(t *testing.T) {

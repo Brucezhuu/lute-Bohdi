@@ -11,9 +11,10 @@
 package test
 
 import (
-	"github.com/88250/lute"
-	"github.com/88250/lute/parse"
 	"testing"
+
+	"github.com/Brucezhuu/lute-Bohdi"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
 )
 
 var gfmSpecTests = []parseTest{

@@ -12,15 +12,17 @@ package parse
 
 import (
 	"bytes"
-	"github.com/88250/lute/ast"
+
+	"github.com/Brucezhuu/lute-Bohdi/ast"
 )
 
 // 判断 Git 冲突标记是否开始。
-//   <<<<<<< HEAD
-//   这里是本地原来的内容
-//   =======
-//   这里是拉取下来的内容
-//   >>>>>>> feebfeb6bef44cf1384d51cdd7aef7e4197b8180
+//
+//	<<<<<<< HEAD
+//	这里是本地原来的内容
+//	=======
+//	这里是拉取下来的内容
+//	>>>>>>> feebfeb6bef44cf1384d51cdd7aef7e4197b8180
 func GitConflictStart(t *Tree, container *ast.Node) int {
 	if !t.Context.ParseOption.GitConflict {
 		return 0

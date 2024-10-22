@@ -15,12 +15,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/88250/lute/editor"
-	"github.com/88250/lute/html"
+	"github.com/Brucezhuu/lute-Bohdi/editor"
+	"github.com/Brucezhuu/lute-Bohdi/html"
 
-	"github.com/88250/lute/ast"
-	"github.com/88250/lute/lex"
-	"github.com/88250/lute/parse"
+	"github.com/Brucezhuu/lute-Bohdi/ast"
+	"github.com/Brucezhuu/lute-Bohdi/lex"
+	"github.com/Brucezhuu/lute-Bohdi/parse"
 )
 
 // VditorSVRenderer 描述了 Vditor Split-View DOM 渲染器。
@@ -114,6 +114,8 @@ func NewVditorSVRenderer(tree *parse.Tree, options *Options) *VditorSVRenderer {
 	ret.RendererFuncs[ast.NodeInlineHTML] = ret.renderInlineHTML
 	ret.RendererFuncs[ast.NodeLink] = ret.renderLink
 	ret.RendererFuncs[ast.NodeImage] = ret.renderImage
+	ret.RendererFuncs[ast.NodeMDlink] = ret.renderMDlink
+	ret.RendererFuncs[ast.NodeCaret] = ret.renderCaret
 	ret.RendererFuncs[ast.NodeBang] = ret.renderBang
 	ret.RendererFuncs[ast.NodeOpenBracket] = ret.renderOpenBracket
 	ret.RendererFuncs[ast.NodeCloseBracket] = ret.renderCloseBracket
@@ -165,6 +167,19 @@ func NewVditorSVRenderer(tree *parse.Tree, options *Options) *VditorSVRenderer {
 	ret.RendererFuncs[ast.NodeLinkRefDefBlock] = ret.renderLinkRefDefBlock
 	ret.RendererFuncs[ast.NodeLinkRefDef] = ret.renderLinkRefDef
 	return ret
+}
+
+func (r *VditorSVRenderer) renderCaret(node *ast.Node, entering bool) ast.WalkStatus {
+	if entering {
+		r.Tag("span", [][]string{{"class", "vditor-sv__marker"}}, false)
+		r.WriteByte(lex.ItemHyphen)
+		r.Tag("/span", nil, false)
+	}
+	return ast.WalkContinue
+}
+
+func (r *VditorSVRenderer) renderMDlink(node *ast.Node, entering bool) ast.WalkStatus {
+	return ast.WalkContinue
 }
 
 func (r *VditorSVRenderer) renderLinkRefDefBlock(node *ast.Node, entering bool) ast.WalkStatus {
